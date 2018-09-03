@@ -1,4 +1,11 @@
 <?php
+
+    if (isset($_SERVER['HTTP_ORIGIN'])) {
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Credentials: true');
+        header('Access-Control-Allow-Headers: X-App-Token, Content-Type');
+    }
+
     $id = $_POST['id'];
  
     $conn = new PDO('mysql:host=localhost;dbname=piranha','root','');

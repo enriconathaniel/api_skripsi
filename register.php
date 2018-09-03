@@ -1,4 +1,11 @@
 <?php
+
+    if (isset($_SERVER['HTTP_ORIGIN'])) {
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Credentials: true');
+        header('Access-Control-Allow-Headers: X-App-Token, Content-Type');
+    }
+
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['password'];

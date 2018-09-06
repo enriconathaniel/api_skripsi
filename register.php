@@ -6,23 +6,38 @@
         header('Access-Control-Allow-Headers: X-App-Token, Content-Type');
     }
 
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
- 
-    function signup($email, $username, $password){
-        $conn = new PDO('mysq:host=localhost;dbname=atlet','root','');
+     $requestBody = json_decode(file_get_contents('php://input'), true);
+    
+    // $nama = $_POST['nama'];
+    // $tanggallahir = $_POST['tanggallahir'];
+    // $email = $_POST['email'];
+    // $password = $_POST['password'];
+
+      $nama = $requestBody['nama'];
+      $tanggallahir = $requestBody['tanggallahir'];
+      $email = $requestBody['email'];
+      $password = $requestBody['password'];
+        
+    //function register($nama, $tanggallahir, $email, $password){
+    $pass_salt = $password.$email;
+    $hash = md5($pass_salt);
+    //echo $hash;
+        $conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
         //$conn = new PDO('mysql:host=mysql.idhostinger.com;dbname=u883464978_mone','u883464978_dolbe','Janssen8');
- 
+
+        $query = "INSERT INTO atlet(nama,tanggallahir,email,password) VALUES('".$nama."','".$tanggallahir."','".$email."','".$hash."')";
+
+        //echo $query;
+        $data = $conn -> query($query);
+
         $return = null;
  
-        $pass_salt = $password.$username;
-        $hash = md5($pass_salt);
+        
  
-        $query = "INSERT INTO users(username,email,password) VALUES('".$username."','".$email."','".$hash."')";
-        $data = $conn -> query($query);
- 
- 
+        
+        
+       // echo $data;
+        
         if($data) {
             $return['success'] = true;  
         }
@@ -31,5 +46,7 @@
         }
  
         echo json_encode($return);
-    }
+
+
+    //}
 ?>

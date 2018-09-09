@@ -32,42 +32,15 @@
 	//include 'config/db_umnspa.php';
 	$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
 
-	$query = "SELECT email, password FROM atlet WHERE email LIKE '".$email."' LIMIT 1";
+	$query = "SELECT email, password, id FROM atlet WHERE email LIKE '".$email."' LIMIT 1";
 	$data = $conn->query($query);
 
 	$return = null;
 	foreach ($data as $row) {
-
-		if(strcmp($row['password'], $password) == 0){
-
-			$query_token = "UPDATE mahasiswa 
-			  		SET token_onesignal = '".$token_onesignal."' WHERE email = '".$email."'";
-
-			$data_update = $conn->query($query_token);
-
-			if($data_update){
-				$return['nim'] = $row['nim'];
-				$return['notification'] = $row['notification'];
-				$return['token'] = true;
-			}
-			else{
-				$return['token'] =  false;
-			}
-			
-			if($return['token'] == true){
-
-				include 'get_api.php';
-
-				$api = 'select_idMoodle.php';
-				$param = ["email" => $email];
-
-				$res = json_decode(get_api($api,$param));
-				//print_r($res);
-
-				$return['id_moodle'] = $res->id_moodle;
-
-				$return['success'] = true;
-			}
+		$hashedPassword = md5($password.$email);
+		if(strcmp($row['password'], $hashedPassword) == 0){
+			$return['success'] = true;
+			$return['id'] = $row['id'];
 		}
 		else{
 			$return['success'] = false;

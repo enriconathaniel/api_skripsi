@@ -6,19 +6,14 @@
         header('Access-Control-Allow-Headers: X-App-Token, Content-Type');
     }
 
-    $requestBody = json_decode(file_get_contents('php://input'), true);
-
-    $id = $requestBody['id'];
-    
-
-
+ 
     $conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
     //$conn = new PDO('mysql:host=mysql.idhostinger.com;dbname=u883464978_mone','u883464978_dolbe','Janssen8');
  
     //$return = null;
  
 //  $query = $conn->prepare("SELECT artifactID FROM users WHERE username = '$username' LIMIT 1");
-    $data = $conn->query("SELECT id, nama, tanggallahir, email, mulai_latihan, point, exp FROM atlet WHERE id = '".$id."'");
+    $data = $conn->query("SELECT id, nama, tanggallahir, email, mulai_latihan, point, exp FROM atlet");
  
     $profile = array();
  

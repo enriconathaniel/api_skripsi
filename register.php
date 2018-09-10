@@ -17,6 +17,10 @@
       $tanggallahir = $requestBody['tanggallahir'];
       $email = $requestBody['email'];
       $password = $requestBody['password'];
+      $date = date("Y-m-d");
+      $point = 0;
+      $exp = 0;
+
         
     //function register($nama, $tanggallahir, $email, $password){
     $pass_salt = $password.$email;
@@ -25,7 +29,7 @@
         $conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
         //$conn = new PDO('mysql:host=mysql.idhostinger.com;dbname=u883464978_mone','u883464978_dolbe','Janssen8');
 
-        $query = "INSERT INTO atlet(nama,tanggallahir,email,password) VALUES('".$nama."','".$tanggallahir."','".$email."','".$hash."')";
+        $query = "INSERT INTO atlet(nama,tanggallahir,email,password,mulai_latihan,point,exp) VALUES('".$nama."','".$tanggallahir."','".$email."','".$hash."','".$date."','".$point."','".$exp."')";
 
         //echo $query;
         $data = $conn -> query($query);

@@ -20,7 +20,7 @@
 	//include 'config/db_umnspa.php';
 	$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
 
-	$query = "SELECT email, password, id FROM atlet WHERE email LIKE '".$email."' LIMIT 1";
+	$query = "SELECT email, password, id, role FROM atlet WHERE email LIKE '".$email."' LIMIT 1";
 	$data = $conn->query($query);
 
 	$return = null;
@@ -29,6 +29,7 @@
 		if(strcmp($row['password'], $hashedPassword) == 0){
 			$return['success'] = true;
 			$return['id'] = $row['id'];
+			$return['role'] = $row['role'];
 		}
 		else{
 			$return['success'] = false;

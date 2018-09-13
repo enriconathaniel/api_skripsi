@@ -14,7 +14,8 @@
 	$waktu = $_POST['waktu'];
 	$date = date("Y-m-d");
 	
-    $conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
+    include 'config/db_con.php';
+    //$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
 	$query = "INSERT INTO history_latihan(id_user, id_gaya, tanggal, waktu) VALUES('".$id_user."','".$id_gaya."','".$date."','".$waktu."')";
 	$data = $conn -> query($query);
 

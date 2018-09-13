@@ -25,7 +25,8 @@
     $id_gaya = $requestBody['id_gaya'];
     $waktu_target = $requestBody['waktu_target'];
  
-    $conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
+    include 'config/db_con.php';
+    //$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
     //$conn = new PDO('mysql:host=mysql.idhostinger.com;dbname=u883464978_mone','u883464978_dolbe','Janssen8');
     $query = "INSERT INTO quest(deskripsi, point, max_umur, min_exp, max_exp, repetition, id_gaya ,waktu_target) VALUES('".$deskripsi."','".$point."','".$max_umur."','".$min_exp."','".$max_exp."','".$repetition."','".$id_gaya."','".$waktu_target."')";
 

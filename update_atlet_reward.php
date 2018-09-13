@@ -14,7 +14,8 @@
 	//$nim = '14110110026';
 	$harga_reward = $requestBody['harga'];
 	//select db
-	$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
+	include 'config/db_con.php';
+	//$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
 	
 	$query = "UPDATE atlet 
 			SET point = point - '".$harga_reward."'

@@ -18,7 +18,8 @@
     $date = date("Y-m-d");
     $waktu = $requestBody['waktu_target'];
  
-    $conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
+    include 'config/db_con.php';
+    //$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
     //$conn = new PDO('mysql:host=mysql.idhostinger.com;dbname=u883464978_mone','u883464978_dolbe','Janssen8');
     //$query = "INSERT INTO reward(nama,harga,gambar) VALUES('".$nama."','".$harga."','".$gambar."')";
 

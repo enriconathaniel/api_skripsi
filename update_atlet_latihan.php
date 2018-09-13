@@ -15,7 +15,8 @@
 	$point_tambah = 50;
 	$exp_tambah = 50;
 	//select db
-	$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
+	include 'config/db_con.php';
+	//$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
 	
 	$query = "UPDATE atlet 
 			SET point = point + '".$point_tambah."',

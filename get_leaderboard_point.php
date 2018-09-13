@@ -6,14 +6,14 @@
         header('Access-Control-Allow-Headers: X-App-Token, Content-Type');
     }
 
- 
-    $conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
+    include 'config/db_con.php';
+    //$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
     //$conn = new PDO('mysql:host=mysql.idhostinger.com;dbname=u883464978_mone','u883464978_dolbe','Janssen8');
  
     //$return = null;
  
 //  $query = $conn->prepare("SELECT artifactID FROM users WHERE username = '$username' LIMIT 1");
-    $data = $conn->query("SELECT id, nama, tanggallahir, email, mulai_latihan, point, exp FROM atlet ORDER BY point ASC");
+    $data = $conn->query("SELECT id, nama, tanggallahir, email, mulai_latihan, point, exp FROM atlet ORDER BY 6 DESC");
  
     $profile = array();
  

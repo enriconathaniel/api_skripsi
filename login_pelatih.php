@@ -18,7 +18,8 @@
 
 	//masukkin db
 	//include 'config/db_umnspa.php';
-	$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
+	include 'config/db_con.php';
+	//$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
 
 	$query = "SELECT email, password, id, role FROM klub WHERE email LIKE '".$email."' LIMIT 1";
 	$data = $conn->query($query);

@@ -10,14 +10,18 @@
 	$requestBody = json_decode(file_get_contents('php://input'), true);
 
 	//set data yang uda diambil
-	$clubinfo = $requestBody['clubinfo'];
-	//$nim = '14110110026';
+	$id = $requestBody['id'];
+	$password = $requestBody['password']
 
+	$pass_salt = $password.$email;
+    $hash = md5($pass_salt);
 	//select db
 	include 'config/db_con.php';
 	//$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
 	
-	$query = "UPDATE klub SET clubinfo = '".$clubinfo."' ;";
+	$query = "UPDATE atlet 
+			SET password = '".$hash."'
+			WHERE id ='".$id."' ";
 
 	$data = $conn->query($query);
 
@@ -32,3 +36,4 @@
 	echo json_encode($return);
 
 ?>
+

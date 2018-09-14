@@ -9,9 +9,10 @@
     $requestBody = json_decode(file_get_contents('php://input'), true);
 
     
-    // $nama = $_POST['nama'];
-    // $harga = $_POST['harga'];
-    // $gambar = $_POST['gambar'];
+
+//    $id_user = $_POST['id_user'];
+ //   $id_reward = $_POST['id_reward'];
+    
     
     $id_user = $requestBody['id_user'];
     $id_reward = $requestBody['id_reward'];

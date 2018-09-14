@@ -9,32 +9,32 @@
 	//ngambil data dari mobile
 	$requestBody = json_decode(file_get_contents('php://input'), true);
 
+
 	//set data yang uda diambil
 	$id = $requestBody['id'];
 	$password = $requestBody['password'];
-	$email = $requestBody['email'];
+	//$token_onesignal = $requestBody['token_onesignal'];
 
-	$pass_salt = $password.$email;
-    $hash = md5($pass_salt);
-	//select db
+
+	//masukkin db
+	//include 'config/db_umnspa.php';
 	include 'config/db_con.php';
 	//$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
-	
-	$query = "UPDATE atlet 
-			SET password = '".$hash."'
-			WHERE id ='".$id."' ";
 
+	$query = "SELECT email, password, id, role FROM atlet WHERE id = '".$id."' LIMIT 1";
 	$data = $conn->query($query);
 
 	$return = null;
-
-	if($data){
-		$return['insert'] = true;
-	} else{
-		$return['insert'] = false;
+	foreach ($data as $row) {
+		$hashedPassword = md5($password.$row[0]);
+		if(strcmp($row['password'], $hashedPassword) == 0){
+			$return['success'] = true;
+			$return['email'] = $row['email'];
+		}
+		else{
+			$return['success'] = false;
+		}
 	}
 
 	echo json_encode($return);
-
 ?>
-

@@ -18,7 +18,7 @@
     //$return = null;
  
 //  $query = $conn->prepare("SELECT artifactID FROM users WHERE username = '$username' LIMIT 1");
-    $data = $conn->query("SELECT id, nama, tanggallahir, email, mulai_latihan, point, exp FROM atlet WHERE id = '".$id."'");
+    $data = $conn->query("SELECT id, nama, tanggallahir, email, mulai_latihan, point, exp, password FROM atlet WHERE id = '".$id."'");
  
     $profile = array();
  
@@ -30,7 +30,8 @@
             'email' => $row[3],
             'mulai_latihan' => $row[4],
             'point' => $row[5],
-            'exp' => $row[6]
+            'exp' => $row[6],
+            'password' => $row[7]
         ));
     }
  

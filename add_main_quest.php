@@ -13,9 +13,12 @@
     $id_atlet = $requestBody['id_atlet'];
     $id_gaya = $requestBody['id_gaya'];
     $waktu_target = $requestBody['waktu_target'];
+    $point = $requestBody['point'];
+    $exp = $requestBody['exp'];
+    $status = 0;
  
     include 'config/db_con.php';
-    $query = "INSERT INTO main_quest(id_atlet, id_gaya, target) VALUES('".$id_atlet."','".$id_gaya."','".$waktu_target."')";
+    $query = "INSERT INTO main_quest(id_atlet, id_gaya, target, point, exp, status) VALUES('".$id_atlet."','".$id_gaya."','".$waktu_target."','".$point."','".$exp."','".$status."')";
 
     $data = $conn -> query($query);
     $return = null;

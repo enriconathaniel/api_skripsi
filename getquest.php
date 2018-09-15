@@ -16,7 +16,7 @@
 //  $query = $conn->prepare("SELECT artifactID FROM users WHERE username = '$username' LIMIT 1");
     //$data = $conn->query("SELECT id, deskripsi, point, max_umur, min_exp, max_exp, repetition FROM quest");
     
-    $data = $conn->query("SELECT main_quest.id, gaya_renang.nama_gaya, gaya_renang.jarak, main_quest.target FROM main_quest JOIN gaya_renang ON main_quest.id_gaya = gaya_renang.id WHERE main_quest.id_atlet = '".$id."'");
+    $data = $conn->query("SELECT main_quest.id, gaya_renang.nama_gaya, gaya_renang.jarak, main_quest.target, main_quest.point, main_quest.exp, main_quest.status FROM main_quest JOIN gaya_renang ON main_quest.id_gaya = gaya_renang.id WHERE main_quest.id_atlet = '".$id."'");
     
     $quest = array();
  
@@ -25,7 +25,10 @@
             'id' => $row[0],
             'gaya_renang_nama' => $row[1],
             'gaya_renang_jarak' => $row[2],
-            'quest_waktu_target' => $row[3]
+            'quest_waktu_target' => $row[3],
+            'point' => $row[4],
+            'exp' => $row[5],
+            'status' => $row[6]
         ));
     }
  

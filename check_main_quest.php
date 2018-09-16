@@ -24,8 +24,8 @@
     $data = $conn->query($query);
     $data2 = $conn->query($query2);
     $waktu_latihan = array();
-    $reward = array();
-
+    $result = array();
+    $success = 0;
     // foreach ($data as $row) {
          
     //     array_push($waktu_latihan, array(
@@ -35,24 +35,51 @@
     // }
 
     foreach ($data2 as $row) {
-        // if target < waktu then update main quest status to 1
 
         foreach ($data as $wl) {
-           
-            if($row[2] == $wl[2] && $row[3]>$wl[4] && $row[6]==0){
-          
+            //if gaya id sama dan waktunya lebih kecil dari target             
+            if($row[2] == $wl[2] && $row[3]>=$wl[4]){
+                          
+
                 $id_main_quest = $row[0];
                 $point_atlet = (int)$row[4];
                 $exp_atlet = (int)$row[5];
-                $query3 = "UPDATE main_quest SET status = 1 WHERE id = '".$id_main_quest."'";
-                $data3 = $conn->query($query3);
-                $query4 = "UPDATE atlet SET point = point + '".$point_atlet."', exp = exp + '".$exp_atlet."' WHERE id = '".$id_atlet."'";
-                $data4 = $conn->query($query4);
+                $query_check_status = "SELECT status FROM main_quest WHERE id = '".$id_main_quest."'";
+                $data_check_status = $conn->query($query_check_status);
+                foreach ($data_check_status as $status) {
+                    $success = 2;
+                    if($status[0] == '0'){
+                        $query3 = "UPDATE main_quest SET status = 1 WHERE id = '".$id_main_quest."'";
+                        $data3 = $conn->query($query3);
+                        $query4 = "UPDATE atlet SET point = point + '".$point_atlet."', exp = exp + '".$exp_atlet."' WHERE id = '".$id_atlet."'";
+                        $data4 = $conn->query($query4); 
+                        $success = 1;                       
+                    }
+                }
+
 
             }
         }
-    }
+       
 
+
+    }
+    if($success == 1){
+        array_push($result, array(
+            'success' => true,
+            'message' => 'succesully updated'
+        ));
+    }else if($success == 2){
+        array_push($result, array(
+            'success' => true,
+            'message' => 'already updated'
+        ));
+    }else{
+        array_push($result, array(
+            'success' => false,
+            'message' => 'no matching data'
+        ));
+    }
  
-    // echo json_encode($reward);
+    echo json_encode($result);
 ?>

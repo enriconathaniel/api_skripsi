@@ -6,11 +6,11 @@
         header('Access-Control-Allow-Headers: X-App-Token, Content-Type');
     }
     
-    // $requestBody = json_decode(file_get_contents('php://input'), true);
-    $id_atlet = $_POST['id'];
+    $requestBody = json_decode(file_get_contents('php://input'), true);
+    
 
-    // $id_atlet = $requestBody['id'];
-
+    $id_atlet = $requestBody['id'];
+    // $id_atlet = $_POST['id'];
 
     include 'config/db_con.php';
     //$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');
@@ -27,7 +27,7 @@
     $point_atlet_skg =0;
     $exp_atlet_skg = 0;
     $level_sekarang = 0;
-    
+    $success = 0;
     foreach ($data as $row_data_atlet) {
         $point_atlet_skg = $row_data_atlet[6];
         $exp_atlet_skg = $row_data_atlet[7];
@@ -47,7 +47,7 @@
             //kecapai
             if($row_side_quest[3]<= $level_sekarang){
                 //cek dulu udah pernah dimasukin atau belum
-
+                $success = 2;
                 $query_validate_side_quest = "SELECT id, id_atlet, id_side_quest, tanggal, status from history_side_quest WHERE id_atlet ='".$id_atlet."'AND id_side_quest='".$id_side_quest."'";
                 $data_validate_side_quest = $conn->query($query_validate_side_quest);
                 if($data_validate_side_quest->rowCount() == 0){
@@ -56,16 +56,17 @@
 
                     $query_update = "UPDATE atlet SET point = point + '".$row_side_quest[4]."', exp = exp + '".$row_side_quest[5]."' WHERE id = '".$id_atlet."'";
                     $data4 = $conn->query($query_update); 
+                    $success = 1;
                         // var_dump($data_insert_history);
-                    echo $query_insert_history;
+                    //echo $query_insert_history;
                 }
             }
         }
     }
 
     // $waktu_latihan = array();
-    // $result = array();
-    // $success = 0;
+    $result = array();
+    
     // foreach ($data as $row) {
          
     //     array_push($waktu_latihan, array(
@@ -75,22 +76,23 @@
     // }
 
     
-    // if($success == 1){
-    //     array_push($result, array(
-    //         'success' => true,
-    //         'message' => 'succesully updated'
-    //     ));
-    // }else if($success == 2){
-    //     array_push($result, array(
-    //         'success' => true,
-    //         'message' => 'already updated'
-    //     ));
-    // }else{
-    //     array_push($result, array(
-    //         'success' => false,
-    //         'message' => 'no matching data'
-    //     ));
-    // }
+    if($success == 1){
+        array_push($result, array(
+            'success' => true,
+            'message' => 'succesully updated'
+        ));
+    }else if($success == 2){
+        array_push($result, array(
+            'success' => true,
+            'message' => 'already updated'
+        ));
+
+    }else{
+        array_push($result, array(
+            'success' => false,
+            'message' => 'no matching data'
+        ));
+    }
  
-    // echo json_encode($result);
+    echo json_encode($result);
 ?>

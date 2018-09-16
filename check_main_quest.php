@@ -6,10 +6,10 @@
         header('Access-Control-Allow-Headers: X-App-Token, Content-Type');
     }
     
-    // $requestBody = json_decode(file_get_contents('php://input'), true);
-    $id_atlet = $_POST['id'];
+    $requestBody = json_decode(file_get_contents('php://input'), true);
+    // $id_atlet = $_POST['id'];
 
-    // $id_atlet = $requestBody['id'];
+    $id_atlet = $requestBody['id'];
 
 
     include 'config/db_con.php';

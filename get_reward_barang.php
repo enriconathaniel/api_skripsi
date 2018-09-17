@@ -49,21 +49,21 @@
     }
 
       array_push($reward_barang, array(
-            'jenis' => 'gold',
+            'jenis' => 'Gold',
             'nama_barang' => $gold,
             'harga' => $harga_gold,
             'id_reward' => $id_reward_gold
             
           ),
           array(
-            'jenis' => 'silver',
+            'jenis' => 'Silver',
             'nama_barang' => $silver,
             'harga' => $harga_silver,
             'id_reward' => $id_reward_silver
             
           ),
           array(
-            'jenis' => 'bronze',
+            'jenis' => 'Bronze',
             'nama_barang' => $bronze,
             'harga' => $harga_bronze,
             'id_reward' => $id_reward_bronze

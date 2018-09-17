@@ -18,6 +18,13 @@
     $profile = array();
  
     foreach ($data as $row) {
+        $exp = $row[6];
+        $data_level = $conn->query("SELECT level, exp_max from level WHERE exp_max > '".$exp."' limit 1");
+        foreach ($data_level as $level) {
+            $level_skg = $level[0]; 
+        }
+
+
         array_push($profile, array(
             'id' => $row[0],
             'nama' => $row[1],
@@ -25,7 +32,8 @@
             'email' => $row[3],
             'mulai_latihan' => $row[4],
             'point' => $row[5],
-            'exp' => $row[6]
+            'exp' => $row[6],
+            'level' => $level_skg
         ));
     }
  

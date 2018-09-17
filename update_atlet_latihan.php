@@ -12,8 +12,8 @@
 	//set data yang uda diambil
 	$id = $requestBody['id_user'];
 	//$nim = '14110110026';
-	$point_tambah = 50;
-	$exp_tambah = 50;
+	$point_tambah = 25;
+	$exp_tambah = 25;
 	//select db
 	include 'config/db_con.php';
 	//$conn = new PDO('mysql:host=localhost;dbname=piranha','root','');

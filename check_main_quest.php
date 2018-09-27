@@ -26,6 +26,8 @@
     $waktu_latihan = array();
     $result = array();
     $success = 0;
+    $result = $data->fetchAll(PDO::FETCH_ASSOC);
+    $result2 = $data2->fetchAll(PDO::FETCH_ASSOC);
     // foreach ($data as $row) {
          
     //     array_push($waktu_latihan, array(
@@ -33,17 +35,24 @@
     //         'id_gaya' => $row[2]
     //     ));
     // }
+    
+    foreach ($result2 as $row) {
+        //foreach data main_quest atlet
+        // echo $row[3];
 
-    foreach ($data2 as $row) {
+        foreach ($result as $wl) {
+            //foreach data latihan
+            //if gaya id sama dan waktunya lebih kecil dari target     
+            //echo $row[3];
+            // echo "|";       
+            // echo $wl[4];
+            // echo "||";
+            if($row["id_gaya"] == $wl["id_gaya"] && $row["target"]>=$wl["waktu"]){
+                
 
-        foreach ($data as $wl) {
-            //if gaya id sama dan waktunya lebih kecil dari target             
-            if($row[2] == $wl[2] && $row[3]>=$wl[4]){
-                          
-
-                $id_main_quest = $row[0];
-                $point_atlet = (int)$row[4];
-                $exp_atlet = (int)$row[5];
+                $id_main_quest = $row["id"];
+                $point_atlet = (int)$row["point"];
+                $exp_atlet = (int)$row["exp"];
                 $query_check_status = "SELECT status FROM main_quest WHERE id = '".$id_main_quest."'";
                 $data_check_status = $conn->query($query_check_status);
                 foreach ($data_check_status as $status) {

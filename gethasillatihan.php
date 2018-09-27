@@ -15,7 +15,7 @@
     //$return = null;
  
 //  $query = $conn->prepare("SELECT artifactID FROM users WHERE username = '$username' LIMIT 1");
-    $data = $conn->query("SELECT history_latihan.id , atlet.nama , gaya_renang.nama_gaya , gaya_renang.jarak , history_latihan.tanggal , history_latihan.waktu FROM history_latihan JOIN gaya_renang ON history_latihan.id_gaya = gaya_renang.id JOIN atlet ON history_latihan.id_user = atlet.id WHERE history_latihan.id_user = '".$id."'");
+    $data = $conn->query("SELECT history_latihan.id , atlet.nama , gaya_renang.nama_gaya , gaya_renang.jarak , history_latihan.tanggal , history_latihan.waktu FROM history_latihan JOIN gaya_renang ON history_latihan.id_gaya = gaya_renang.id JOIN atlet ON history_latihan.id_user = atlet.id WHERE history_latihan.id_user = '".$id."' ORDER BY history_latihan.tanggal DESC");
  
     $hasil_latihan_id = array();
  

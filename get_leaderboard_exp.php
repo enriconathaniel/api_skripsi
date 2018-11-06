@@ -13,7 +13,7 @@
     //$return = null;
  
 //  $query = $conn->prepare("SELECT artifactID FROM users WHERE username = '$username' LIMIT 1");
-    $data = $conn->query("SELECT id, nama, tanggallahir, email, mulai_latihan, point, exp FROM atlet ORDER BY 7 DESC");
+    $data = $conn->query("SELECT id, nama, tanggallahir, email, mulai_latihan, point, exp FROM atlet WHERE nama IS NOT NULL AND nama != '' ORDER BY 7 DESC ");
  
     $profile = array();
  
